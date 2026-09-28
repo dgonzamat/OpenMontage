@@ -18,7 +18,10 @@ Guía para producir vídeos promocionales de **uapcodex.org**, un sitio de inves
 - Nombre del entregable: `projects/<caso>/renders/<caso>-1x1-30s-ig.mp4`. Debe pesar **menos de 30 MB**, porque `SendUserFile` rechaza archivos mayores.
 
 ## 2. Flujo de trabajo (en este orden)
-1. **Investigar** la ficha del caso. Escribir `projects/<caso>/SCRIPT.md` con una tabla de escenas, datos con su fuente y una sección "Pendiente de verificar".
+1. **Investigar** la ficha del caso **en el momento de producir**; no fiarse de notas de sesiones anteriores. Escribir `projects/<caso>/SCRIPT.md` con una tabla de escenas, datos con su fuente y fecha de consulta, y una sección "Pendiente de verificar".
+   - ⚠️ Lección de Manises: las notas antiguas decían 78%, "intense red lights", "radar contact" y Palma → Las Palmas. La ficha del 2026-09-28 dice **50%**, "two steady red lights, without flashing", "**no** radar contact" y JK-297 Palma → Tenerife; además, Mach 1.4 es una declaración posterior del piloto, no un dato del expediente.
+   - Pide a WebFetch el **texto literal**, no un resumen. Vuelve a comprobar cada cifra del vídeo **justo antes de renderizar**.
+   - Distingue en pantalla lo que dice el expediente de lo que son declaraciones posteriores (p. ej. "PILOT'S LATER CLAIM · NOT IN THE FILE").
 2. **Guion:** unas 60–65 palabras para 30 s, en unas 6 frases.
    - Estructura: gancho → incidente → escalada → dato clave → visión escéptica → CTA.
    - Frase final: **"Read case <N>, at U A P Codex dot org."** Con "Case <N>." a secas, la mezcla se oía como "Face 21".
@@ -72,6 +75,8 @@ Guía para producir vídeos promocionales de **uapcodex.org**, un sitio de inves
     - **bajada casi a silencio unos 0,5 s antes del cierre**;
     - fade final.
   - Nivel en la composición: unos 0,34.
+  - **Ducking obligatorio** con la voz como clave de sidechain: `[music][vo]sidechaincompress=threshold=0.012:ratio=10:attack=15:release=350`.
+  - Objetivo: música unos 12 LU por debajo de la voz mientras se habla. Sin ducking quedaba solo unos 3,6 LU por debajo y restaba claridad a la voz.
 - **Efectos** sintetizados con `ffmpeg aevalsrc` (boom, ping, riser, hit, whoosh, papel).
   - No deben pisar palabras clave de la voz. Adelantar el efecto y verificar con Whisper.
 - **Máster final:** `loudnorm=I=-14:TP=-1.5`.
@@ -98,6 +103,11 @@ Guía para producir vídeos promocionales de **uapcodex.org**, un sitio de inves
   5. **Coherencia imagen-texto:** si dice "it slips away", la luz tiene que irse. Borrar la luz pintada y animarla.
   6. **Tamaños mínimos para móvil:** crédito 17 px, etiquetas 26 px, sellos 30 px o más.
   7. **Ritmo:** ninguna escena estática de más de unos 3 s sin algo que cambie.
+  8. **Portada = fotograma 0:** el gancho y el elemento clave (p. ej. las luces) ya visibles en t=0, sin animación de entrada. Instagram usa ese fotograma como portada si no se elige otra.
+  9. **Nada cruza los subtítulos:** las piezas entran por arriba o por los lados, nunca desde abajo mientras hay un subtítulo en pantalla.
+  10. **Sin fotogramas vacíos:** ni notas vacías antes del texto tecleado ni fondos sin elementos al empezar una escena.
+  11. **Los recortes no deben salirse del cuadro** (deriva del avión, alas); movimiento moderado para no enseñar el hueco del fondo.
+  12. **Pronunciación de nombres propios:** `bm_george` dijo "Manny's" por Manises. Usar `[Manises](/manˈisɛs/)` y verificar con Whisper.
 
 ## 7. Marca UAP Codex
 - Colores:
@@ -113,7 +123,7 @@ Guía para producir vídeos promocionales de **uapcodex.org**, un sitio de inves
   - "Codex" en cursiva roja sobre fondo claro, o `#ee6075` sobre fondo oscuro.
   - Al escalarlo, fijar **`font-variation-settings:"opsz" 30`**; si no, sale con demasiado contraste.
   - Hay una tarjeta de cierre con logo, CTA y etiquetas en la plantilla (escena `s7`).
-- **Datos del cierre:** usar solo lo que diga la ficha (Tier, porcentaje, fechas). Verificar si la ficha usa la palabra "Probability".
+- **Datos del cierre:** usar solo lo que diga la ficha (Tier, "Probability: NN%", fecha de desclasificación). Las fichas usan la etiqueta "Probability" (comprobado en Manises, 2026-09-28).
 
 ## 8. Verificar y entregar
 1. `npx hyperframes lint` con 0 errores. Luego `npx hyperframes snapshot --at <t1,t2,…> -o snaps .` y **mirar las hojas de contactos**.

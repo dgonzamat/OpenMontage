@@ -1,12 +1,12 @@
 <!doctype html>
-<!-- PLANTILLA UAP Codex · collage 1:1 30s. Ejemplo completo: Manises 1979 (caso 21), versión v2.
-     Sustituir: imágenes de assets/img (s1..s7), CAPS (subtítulos), textos/etiquetas, posiciones de luces y tiempos.
+<!-- PLANTILLA UAP Codex · collage 1:1 30s. Ejemplo completo: Manises 1979 (caso 21), versión v3 (datos verificados en la ficha el 2026-09-28).
+     Sustituir: imágenes de assets/img (s1..s7, recortes), CAPS (subtítulos), textos/etiquetas, posiciones de luces y tiempos.
      Ver uapcodex/CLAUDE.md §6. assets/gsap.min.js se descarga con uapcodex/scripts/setup.sh. -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1080" />
-    <title>Manises 1979 — collage v2</title>
+    <title>Manises 1979 — collage v3</title>
     <script src="assets/gsap.min.js"></script>
     <style>
       @font-face { font-family: "FV"; font-style: normal; font-weight: 100 900; src: url("assets/fonts/Fraunces-var-normal.woff2") format("woff2"); }
@@ -36,7 +36,7 @@
       .strip.dark { background: #171717; color: #efe5cf; }
 
       /* hook */
-      .hk { opacity: 0; box-shadow: 6px 9px 0 rgba(0,0,0,0.45); white-space: nowrap; }
+      .hk { opacity: 1; box-shadow: 6px 9px 0 rgba(0,0,0,0.45); white-space: nowrap; }
       #hk1 { left: 70px; top: 150px; background: #efe5cf; padding: 14px 34px 20px; transform: rotate(-3deg);
         clip-path: polygon(0 5%, 15% 0, 40% 4%, 70% 0, 100% 5%, 99% 100%, 65% 95%, 35% 100%, 0 96%); }
       #hk1 span { font-family: "FV"; font-weight: 600; font-variation-settings: "opsz" 144; font-size: 92px; line-height: 1; color: #171717; }
@@ -46,15 +46,15 @@
 
       .slip { background: #efe5cf; padding: 22px 28px 20px; box-shadow: 5px 7px 0 rgba(0,0,0,0.4); opacity: 0;
         clip-path: polygon(0 4%, 20% 0, 50% 5%, 80% 0, 100% 6%, 98% 100%, 70% 95%, 40% 100%, 10% 95%, 0 100%); }
-      .slip .q { font-family: "FV"; font-style: italic; font-weight: 500; font-variation-settings: "opsz" 72; font-size: 62px; line-height: 1.05; color: #b0141f; display: block; min-height: 66px; }
+      .slip .q { font-family: "FV"; font-style: italic; font-weight: 500; font-variation-settings: "opsz" 72; font-size: 52px; line-height: 1.08; color: #b0141f; display: block; min-height: 112px; }
       .slip .s { font-size: 19px; letter-spacing: 0.16em; color: #3a2e2a; margin-top: 10px; display: block; }
       .stamp { white-space: nowrap; font-size: 34px; letter-spacing: 0.18em; color: #c41e3a; border: 6px solid #c41e3a; padding: 8px 18px; font-weight: 700; opacity: 0; background: rgba(239,229,207,0.92); }
 
       #alarm { position: absolute; inset: 0; background: #c41e3a; mix-blend-mode: multiply; opacity: 0; }
 
-      #mach { left: 50px; top: 590px; width: 500px; background: #efe5cf; padding: 16px 24px 20px; box-shadow: 5px 7px 0 rgba(0,0,0,0.45); opacity: 0;
+      #mach { left: 50px; top: 590px; width: 580px; background: #efe5cf; padding: 16px 24px 20px; box-shadow: 5px 7px 0 rgba(0,0,0,0.45); opacity: 0;
         clip-path: polygon(0 3%, 30% 0, 65% 4%, 100% 0, 98% 97%, 60% 100%, 25% 96%, 1% 100%); }
-      #mach .k { font-size: 18px; letter-spacing: 0.2em; color: #3a2e2a; display: block; }
+      #mach .k { font-size: 16px; white-space: nowrap; letter-spacing: 0.14em; color: #3a2e2a; display: block; }
       #mach .n { font-family: "FV"; font-weight: 600; font-variation-settings: "opsz" 144; font-size: 104px; line-height: 1; color: #171717; display: block; margin-top: 4px; white-space: nowrap; }
       #mach .bar { height: 14px; background: #d8cbb0; margin-top: 10px; position: relative; overflow: hidden; }
       #mach .bar b { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: #c41e3a; transform-origin: 0 50%; transform: scaleX(0.43); display: block; }
@@ -99,7 +99,7 @@
   <body>
     <div id="root" data-composition-id="main" data-width="1080" data-height="1080" data-duration="30">
 
-      <!-- S1 night flight: layered cut-outs -->
+      <!-- S1 night flight: hook visible on frame 0 (cover) + layered cut-outs -->
       <section id="s1" class="scene clip" data-start="0" data-duration="5.5" data-track-index="0">
         <div class="cam" id="c1">
           <img class="full" src="assets/img/s1_bg.jpg" alt="" />
@@ -107,55 +107,53 @@
           <div class="light" id="L1" style="left:-26px;top:232px;width:260px;height:260px"></div>
           <div class="light" id="L2" style="left:682px;top:428px;width:300px;height:300px"></div>
         </div>
-        <div class="strip ab m" id="k1" style="left:40px;top:44px;transform:rotate(-1.5deg)"><i></i>NIGHT OF 11–12 NOV 1979 · OFF VALENCIA</div>
-        <div class="strip dark ab m" id="k1b" style="left:60px;top:126px;transform:rotate(1.5deg)"><i></i>TAE AIRLINER · PALMA → LAS PALMAS</div>
+        <div class="strip ab m" id="k1" style="left:40px;top:44px;transform:rotate(-1.5deg)"><i></i>11 NOV 1979 · 22:05 Z</div>
+        <div class="strip dark ab m" id="k1b" style="left:60px;top:126px;transform:rotate(1.5deg)"><i></i>TAE FLIGHT JK-297 · PALMA → TENERIFE</div>
         <div class="hk ab" id="hk1"><span>What were the</span></div>
         <div class="hk ab" id="hk2"><span>red lights?</span></div>
       </section>
 
       <!-- S2 cockpit -->
-      <section id="s2" class="scene clip" data-start="5" data-duration="6.1" data-track-index="1">
+      <section id="s2" class="scene clip" data-start="5" data-duration="6.4" data-track-index="1">
         <div class="cam" id="c2">
           <img class="full" src="assets/img/s2.jpg" alt="" />
           <div class="halo" id="h2a" style="left:437px;top:122px;width:260px;height:260px"></div>
           <div class="halo" id="h2b" style="left:736px;top:196px;width:220px;height:220px"></div>
         </div>
-        <div id="alarm"></div>
-        <div class="slip ab" id="sl2" style="left:50px;top:540px;width:680px;transform:rotate(-2deg)"><span class="q" id="qt2"></span><span class="s m">CREW REPORT · UAPCODEX.ORG · CASE 21</span></div>
-        <div class="stamp ab m" id="st2" style="left:250px;top:750px;transform:rotate(-6deg)">EMERGENCY LANDING · MANISES</div>
-      </section>
-
-      <!-- S3 radar (hard cut) -->
-      <section id="s3" class="scene clip" data-start="11" data-duration="2.7" data-track-index="2">
-        <div class="cam" id="c3">
-          <img class="full" src="assets/img/s3.jpg" alt="" />
-          <div class="gblip" id="g3" style="left:125px;top:448px;width:120px;height:120px"></div>
-        </div>
-        <div class="strip ab m" id="k3" style="left:560px;top:60px;transform:rotate(2deg)"><i></i>SPANISH AIR FORCE</div>
+        <div class="strip dark ab m" id="k2" style="left:620px;top:44px;transform:rotate(2deg)"><i></i>3 MILES → ½ MILE</div>
+        <div class="slip ab" id="sl2" style="left:40px;top:500px;width:780px;transform:rotate(-2deg)"><span class="q" id="qt2"></span><span class="s m">CREW REPORT · UAPCODEX.ORG · CASE 21</span></div>
+        <div class="stamp ab m" id="st2" style="left:260px;top:790px;transform:rotate(-6deg)">DIVERTED · LANDS AT MANISES</div>
       </section>
 
       <!-- S4 Mirage takeoff (torn wipe) -->
-      <section id="s4" class="scene clip" data-start="13.2" data-duration="3.7" data-track-index="3">
+      <section id="s4" class="scene clip" data-start="10.9" data-duration="3.9" data-track-index="2">
         <div class="cam" id="c4">
           <img class="full" id="bg4" src="assets/img/s4_bg.jpg" alt="" style="width:1180px;height:1180px;left:-50px;top:-50px" />
           <img class="full cut" id="jet4" src="assets/img/s4_jet.png" alt="" />
         </div>
-        <div class="strip ab m" id="k4" style="left:50px;top:60px;transform:rotate(-2deg)"><i></i>MIRAGE F-1 · WING 14 · LOS LLANOS</div>
+        <div class="strip ab m" id="k4" style="left:50px;top:50px;transform:rotate(-2deg)"><i></i>MIRAGE F-1 · LOS LLANOS · 23:42 Z</div>
       </section>
 
       <!-- S5 chase -->
-      <section id="s5" class="scene clip" data-start="16.5" data-duration="5.9" data-track-index="4">
+      <section id="s5" class="scene clip" data-start="14.4" data-duration="3.9" data-track-index="3">
         <div class="cam" id="c5">
           <img class="full" src="assets/img/s5_bg.jpg" alt="" />
           <div class="light" id="L5" style="left:838px;top:164px;width:200px;height:200px"></div>
         </div>
-        <div class="strip ab m" id="k5" style="left:50px;top:60px;transform:rotate(-1.5deg)"><i></i>PILOT: RADAR CONTACT</div>
-        <div id="mach" class="ab"><span class="k m">AIRSPEED</span><span class="n" id="machn">MACH 0.6</span><div class="bar"><b id="machb"></b></div></div>
-        <div class="stamp ab m" id="st5" style="left:590px;top:640px;transform:rotate(-8deg)">IT SLIPS AWAY</div>
+        <div class="strip ab m" id="k5" style="left:50px;top:60px;transform:rotate(-1.5deg)"><i></i>THE CHASE</div>
+        <div id="mach" class="ab"><span class="k m">PILOT'S LATER CLAIM · NOT IN THE FILE</span><span class="n" id="machn">MACH 0.6</span><div class="bar"><b id="machb"></b></div></div>
+        <div class="stamp ab m" id="st5" style="left:560px;top:470px;transform:rotate(-8deg)">NEVER GOT CLOSER</div>
+      </section>
+
+      <!-- S3 radar (hard cut): nothing on the scope -->
+      <section id="s3" class="scene clip" data-start="17.9" data-duration="4.6" data-track-index="4">
+        <div class="cam" id="c3"><img class="full" src="assets/img/s3.jpg" alt="" /></div>
+        <div class="strip ab m" id="k3" style="left:560px;top:60px;transform:rotate(2deg)"><i></i>RADAR CHECK</div>
+        <div class="stamp ab m" id="st3" style="left:40px;top:470px;font-size:40px;transform:rotate(-8deg)">NO RADAR CONTACT</div>
       </section>
 
       <!-- S6 skeptic view (hard cut) -->
-      <section id="s6" class="scene clip" data-start="22.3" data-duration="4.7" data-track-index="5">
+      <section id="s6" class="scene clip" data-start="22.4" data-duration="4.4" data-track-index="5">
         <div class="cam" id="c6">
           <img class="full" src="assets/img/s6.jpg" alt="" />
           <div class="halo" id="h6a" style="left:184px;top:289px;width:180px;height:180px"></div>
@@ -164,14 +162,14 @@
         </div>
         <div id="skep" class="slip ab" style="transform:rotate(-1.5deg)">
           <span class="h m">THE SKEPTIC VIEW</span>
-          <span class="line" id="sk1">Refinery flares?</span>
-          <span class="line" id="sk2">Electronic interference?</span>
-          <span class="s m">— V.-J. BALLESTER OLMOS</span>
+          <span class="line" id="sk1">Refinery flares at Escombreras?</span>
+          <span class="line" id="sk2">Still disputed.</span>
+          <span class="s m">— HYPOTHESIS: J. A. FERNÁNDEZ PERIS</span>
         </div>
       </section>
 
       <!-- S7 end card -->
-      <section id="s7" class="scene clip" data-start="26.6" data-duration="3.4" data-track-index="6">
+      <section id="s7" class="scene clip" data-start="26.4" data-duration="3.6" data-track-index="6">
         <div class="cam" id="c7"><img class="full" src="assets/img/s7.jpg" alt="" /></div>
         <div class="strip dark ab m" id="kick7" style="transform:rotate(-2deg)"><i></i>CASE FILE No. 21 · MANISES · NOV 1979</div>
         <div id="card" class="ab" style="transform:rotate(-1.2deg)">
@@ -182,8 +180,8 @@
         <div class="tape" id="tp2" style="left:62px;top:540px;transform:rotate(24deg)"></div>
         <div id="cta" class="ab" style="transform:rotate(1.5deg)"><div><small>READ THE FULL FILE</small>uapcodex.org  →</div></div>
         <div class="lab ab m" id="l1" style="left:90px;top:815px;transform:rotate(-3deg)">TIER S</div>
-        <div class="lab ab m" id="l2" style="left:270px;top:822px;transform:rotate(2deg)">PROBABILITY 78%</div>
-        <div class="stamp ab m" id="st7" style="left:600px;top:806px;font-size:26px;padding:8px 14px;transform:rotate(-7deg)">DECLASSIFIED 1992–95</div>
+        <div class="lab ab m" id="l2" style="left:270px;top:822px;transform:rotate(2deg)">PROBABILITY 50%</div>
+        <div class="stamp ab m" id="st7" style="left:600px;top:806px;font-size:26px;padding:8px 14px;transform:rotate(-7deg)">DECLASSIFIED 1994</div>
       </section>
 
       <div id="caps"></div>
@@ -200,20 +198,19 @@
     </div>
 
     <script>
-      // captions (built before the timeline; deterministic)
       const CAPS = [
-        [2.8, 4.6, "A night flight over <b>Valencia</b>."],
-        [5.35, 6.2, "Suddenly —"],
-        [7.15, 8.25, "…<b>closing in</b>."],
-        [8.35, 9.45, "The captain declares"],
-        [9.45, 10.9, "an <b>emergency</b>."],
-        [11.0, 12.45, "The Air Force sends"],
-        [12.45, 14.8, "a <b>Mirage F-1</b> after them."],
-        [16.6, 17.6, "The pilot reports"],
-        [17.6, 18.95, "<b>radar contact</b>."],
-        [19.05, 20.7, "He hits <b>Mach 1.4</b>…"],
-        [20.7, 22.2, "and it <b>slips away</b>."],
-        [22.6, 23.4, "Skeptics point to…"],
+        [2.9, 4.55, "A night flight to <b>Tenerife</b>."],
+        [5.2, 5.95, "Suddenly —"],
+        [7.0, 7.85, "…<b>close in</b>."],
+        [8.1, 9.15, "The captain diverts"],
+        [9.15, 10.6, "to <b>Manises</b>."],
+        [11.1, 12.4, "The Air Force launches"],
+        [12.4, 14.2, "a <b>Mirage F-1</b>."],
+        [14.45, 15.75, "The pilot chases them…"],
+        [15.75, 17.5, "but <b>never gets closer</b>."],
+        [19.25, 20.4, "Not on the jet."],
+        [20.4, 22.2, "Not on <b>air-defense radar</b>."],
+        [22.7, 23.45, "Skeptics suggest…"],
       ];
       const capHost = document.getElementById("caps");
       CAPS.forEach((c, i) => {
@@ -233,15 +230,12 @@
         tl.set("#cap" + i, { opacity: 0 }, c[1]);
       });
 
-      // stepped camera push per scene
-      [["#c1", 0, 5.5, 1.0, 1.06], ["#c2", 5, 6.1, 1.0, 1.12], ["#c3", 11, 2.7, 1.0, 1.1],
-       ["#c5", 16.5, 5.9, 1.0, 1.1], ["#c6", 22.3, 4.7, 1.1, 1.0], ["#c7", 26.6, 3.4, 1.04, 1.0]]
+      [["#c1", 0, 5.5, 1.0, 1.06], ["#c2", 5, 6.4, 1.0, 1.12], ["#c5", 14.4, 3.9, 1.0, 1.08],
+       ["#c3", 17.9, 4.6, 1.0, 1.1], ["#c6", 22.4, 4.4, 1.1, 1.0], ["#c7", 26.4, 3.6, 1.04, 1.0]]
         .forEach(([c, t, d, a, b]) => tl.fromTo(c, { scale: a }, { scale: b, duration: d, ease: S(Math.round(d * 6)) }, t));
 
-      // ---------- transitions (varied) ----------
-      tl.fromTo("#s2", { x: 1100, rotation: 5 }, { x: 0, rotation: 0, duration: 0.42, ease: S(5), ...IR }, 5.0);              // paper shove
-      tl.fromTo("#flash", { opacity: 0.85 }, { opacity: 0, duration: 0.25, ease: S(3), ...IR }, 11.0);                             // hard cut + flash
-      // torn-paper wipe for s4
+      // ---------- transitions ----------
+      tl.fromTo("#s2", { x: 1100, rotation: 5 }, { x: 0, rotation: 0, duration: 0.42, ease: S(5), ...IR }, 5.0);
       const J = [0, 34, -18, 26, -30, 14, -24, 30, -12, 22, -28, 10, 0];
       const tear = (X) => {
         const pts = ["0px 0px"];
@@ -249,79 +243,83 @@
         pts.push("0px 1080px"); return "polygon(" + pts.join(",") + ")";
       };
       const tw = { X: -60 };
-      document.getElementById("s4").style.clipPath = tear(-60);
-      tl.to(tw, { X: 1160, duration: 0.45, ease: S(6), onUpdate: () => { $("s4").style.clipPath = tear(tw.X); } }, 13.2);
-      tl.fromTo("#s5", { x: 1100, rotation: -4 }, { x: 0, rotation: 0, duration: 0.42, ease: S(5), ...IR }, 16.5);             // paper shove
-      tl.fromTo("#blk", { opacity: 1 }, { opacity: 0, duration: 0.12, ease: S(1), ...IR }, 22.3);                                   // hard cut on black
-      tl.fromTo("#s7", { scale: 1.35, rotation: -3 }, { scale: 1, rotation: 0, duration: 0.3, ease: S(3), ...IR }, 26.6);        // slam
+      $("s4").style.clipPath = tear(-60);
+      tl.to(tw, { X: 1160, duration: 0.45, ease: S(6), onUpdate: () => { $("s4").style.clipPath = tear(tw.X); } }, 10.9);
+      tl.fromTo("#s5", { x: 1100, rotation: -4 }, { x: 0, rotation: 0, duration: 0.42, ease: S(5), ...IR }, 14.4);
+      tl.fromTo("#flash", { opacity: 0.85 }, { opacity: 0, duration: 0.25, ease: S(3), ...IR }, 17.9);
+      tl.fromTo("#blk", { opacity: 1 }, { opacity: 0, duration: 0.12, ease: S(1), ...IR }, 22.4);
+      tl.fromTo("#s7", { scale: 1.35, rotation: -3 }, { scale: 1, rotation: 0, duration: 0.3, ease: S(3), ...IR }, 26.4);
 
-      // ---------- S1: hook + layered cut-outs ----------
-      tl.fromTo("#hk1", { opacity: 1, x: -700 }, { opacity: 1, x: 0, duration: 0.3, ease: S(3), ...IR }, 0.05);
-      tl.fromTo("#hk2", { opacity: 1, x: 800 }, { opacity: 1, x: 0, duration: 0.3, ease: S(3), ...IR }, 0.35);
+      // ---------- S1 (hook on frame 0, distant lights visible on the cover) ----------
+      tl.fromTo("#hk1", { rotation: -3 }, { rotation: -2.2, duration: 0.25, yoyo: true, repeat: 7, ease: S(1) }, 0.1);
+      tl.fromTo("#hk2", { rotation: 2 }, { rotation: 2.8, duration: 0.25, yoyo: true, repeat: 7, ease: S(1) }, 0.1);
       tl.to("#hk1", { y: -600, rotation: -12, duration: 0.3, ease: S(3) }, 2.35);
       tl.to("#hk2", { y: -700, rotation: 10, duration: 0.3, ease: S(3) }, 2.45);
       tl.fromTo("#k1", { opacity: 1, y: -140 }, { opacity: 1, y: 0, duration: 0.4, ease: S(4), ...IR }, 2.6);
-      tl.fromTo("#k1b", { opacity: 1, x: -800 }, { opacity: 1, x: 0, duration: 0.4, ease: S(4), ...IR }, 3.0);
+      tl.fromTo("#k1b", { opacity: 1, x: -900 }, { opacity: 1, x: 0, duration: 0.4, ease: S(4), ...IR }, 3.0);
       tl.fromTo("#plane", { x: -150, y: 40, rotation: -1.5 }, { x: 30, y: 0, rotation: 0, duration: 5.5, ease: S(22) }, 0);
       tl.fromTo("#pw", { y: 0 }, { y: -10, duration: 0.4, yoyo: true, repeat: 3, ease: S(2) }, 0.2);
-      tl.to("#plane", { y: -26, rotation: -3, duration: 0.12, ease: S(1) }, 3.95);   // flinch as the lights arrive
+      tl.to("#plane", { y: -26, rotation: -3, duration: 0.12, ease: S(1) }, 3.95);
       tl.to("#plane", { y: 0, rotation: 0, duration: 0.25, ease: S(2) }, 4.1);
-      tl.set(["#L1", "#L2"], { opacity: 0 }, 0);
-      tl.fromTo("#L1", { opacity: 1, x: -260, y: -170, scale: 0.25 }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.6, ease: S(12), ...IR }, 2.3);
-      tl.fromTo("#L2", { opacity: 1, x: 420, y: -300, scale: 0.2 }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.6, ease: S(12), ...IR }, 2.45);
+      tl.set("#L1", { opacity: 1, x: 120, y: -230, scale: 0.22 }, 0);
+      tl.set("#L2", { opacity: 1, x: 190, y: -240, scale: 0.2 }, 0);
+      tl.to(["#L1", "#L2"], { opacity: 0.6, duration: 0.2, yoyo: true, repeat: 9, ease: S(2) }, 0.1);
+      tl.to("#L1", { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.6, ease: S(12) }, 2.3);
+      tl.to("#L2", { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.6, ease: S(12) }, 2.45);
       tl.to(["#L1", "#L2"], { scale: 1.15, duration: 0.18, yoyo: true, repeat: 7, ease: S(2) }, 4.05);
 
-      // ---------- S2: cockpit ----------
+      // ---------- S2 cockpit ----------
       const pulse = (id, t0, t1, a = 0.9, grow = 1.2) => {
         tl.fromTo(id, { opacity: 0, scale: 0.6 }, { opacity: a, scale: 1, duration: 0.3, ease: S(3), ...IR }, t0);
         const n = Math.max(1, Math.floor((t1 - t0 - 0.3) / 0.36));
         tl.to(id, { scale: grow, opacity: a * 0.7, duration: 0.18, yoyo: true, repeat: n * 2 - 1, ease: S(2) }, t0 + 0.3);
       };
-      pulse("#h2a", 5.5, 11.1, 0.9, 1.35); pulse("#h2b", 5.7, 11.1, 0.9, 1.35);
-      tl.fromTo("#sl2", { opacity: 1, y: 460 }, { opacity: 1, y: 0, duration: 0.4, ease: S(5), ...IR }, 5.8);
-      const q = "“intense red lights”"; const qs = { n: 0 };
-      tl.to(qs, { n: q.length, duration: 0.95, ease: S(q.length), onUpdate: () => { $("qt2").textContent = q.slice(0, Math.round(qs.n)); } }, 6.2);
-      tl.fromTo("#alarm", { opacity: 0 }, { opacity: 0.28, duration: 0.2, yoyo: true, repeat: 5, ease: S(2), ...IR }, 9.5);
-      tl.to("#c2", { x: 9, y: -7, duration: 0.05, yoyo: true, repeat: 11, ease: S(1) }, 9.55);
-      tl.fromTo("#st2", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.18, ease: S(2), ...IR }, 9.7);
+      pulse("#h2a", 5.5, 11.3, 0.9, 1.35); pulse("#h2b", 5.7, 11.3, 0.9, 1.35);
+      tl.fromTo("#sl2", { opacity: 1, x: -900 }, { opacity: 1, x: 0, duration: 0.35, ease: S(4), ...IR }, 5.55);
+      const q = "“two steady red lights, without flashing”"; const qs = { n: 1 };
+      $("qt2").textContent = q.slice(0, 1);
+      tl.to(qs, { n: q.length, duration: 1.3, ease: S(q.length), onUpdate: () => { $("qt2").textContent = q.slice(0, Math.round(qs.n)); } }, 5.9);
+      tl.fromTo("#k2", { opacity: 1, y: -140 }, { opacity: 1, y: 0, duration: 0.35, ease: S(4), ...IR }, 7.05);
+      tl.to("#c2", { x: 9, y: -7, duration: 0.05, yoyo: true, repeat: 7, ease: S(1) }, 9.3);
+      tl.fromTo("#st2", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.18, ease: S(2), ...IR }, 9.3);
 
-      // ---------- S3: radar ----------
-      tl.fromTo("#g3", { opacity: 0 }, { opacity: 1, duration: 0.2, yoyo: true, repeat: 9, ease: S(2), ...IR }, 11.3);
-      tl.fromTo("#k3", { opacity: 1, y: -140 }, { opacity: 1, y: 0, duration: 0.35, ease: S(4), ...IR }, 11.3);
+      // ---------- S4 takeoff (smaller climb: fin stays in frame, less hole revealed) ----------
+      tl.fromTo("#bg4", { x: 0, y: 0 }, { x: -50, y: 20, duration: 3.9, ease: S(18) }, 10.9);
+      tl.fromTo("#jet4", { x: -30, y: 40, rotation: 1.5, scale: 0.97 }, { x: 45, y: -30, rotation: -2, scale: 1.01, duration: 3.9, ease: S(18) }, 10.9);
+      tl.to("#c4", { x: 10, y: -8, duration: 0.05, yoyo: true, repeat: 9, ease: S(1) }, 11.05);
+      tl.fromTo("#k4", { opacity: 1, x: -900 }, { opacity: 1, x: 0, duration: 0.4, ease: S(5), ...IR }, 11.4);
 
-      // ---------- S4: Mirage takes off (cut-out climbs over panning ground) ----------
-      tl.fromTo("#bg4", { x: 0, y: 0 }, { x: -60, y: 30, duration: 3.7, ease: S(18) }, 13.2);
-      tl.fromTo("#jet4", { x: -40, y: 50, rotation: 2, scale: 0.96 }, { x: 70, y: -80, rotation: -3, scale: 1.06, duration: 3.7, ease: S(18) }, 13.2);
-      tl.to("#c4", { x: 10, y: -8, duration: 0.05, yoyo: true, repeat: 9, ease: S(1) }, 13.35);
-      tl.fromTo("#k4", { opacity: 1, x: -800 }, { opacity: 1, x: 0, duration: 0.4, ease: S(5), ...IR }, 13.8);
-
-      // ---------- S5: chase, mach, the light escapes ----------
-      tl.fromTo("#k5", { opacity: 1, y: -140 }, { opacity: 1, y: 0, duration: 0.35, ease: S(4), ...IR }, 16.9);
-      pulse("#L5", 16.9, 20.7, 0.95, 1.15);
-      tl.fromTo("#mach", { opacity: 1, y: 420, rotation: 6 }, { opacity: 1, y: 0, rotation: -2, duration: 0.4, ease: S(5), ...IR }, 18.2);
+      // ---------- S5 chase ----------
+      tl.fromTo("#k5", { opacity: 1, y: -140 }, { opacity: 1, y: 0, duration: 0.35, ease: S(4), ...IR }, 14.75);
+      pulse("#L5", 14.5, 18.3, 0.95, 1.15);
+      tl.fromTo("#mach", { opacity: 1, x: -700, rotation: -6 }, { opacity: 1, x: 0, rotation: -2, duration: 0.35, ease: S(4), ...IR }, 14.9);
       const ms = { v: 0.6 };
-      tl.to(ms, { v: 1.4, duration: 1.2, ease: S(8), onUpdate: () => { $("machn").textContent = "MACH " + ms.v.toFixed(1); } }, 18.8);
-      tl.fromTo("#machb", { scaleX: 0.43 }, { scaleX: 1, duration: 1.2, ease: S(8), ...IR }, 18.8);
-      tl.to("#c5", { x: 6, y: -5, duration: 0.05, yoyo: true, repeat: 11, ease: S(1) }, 19.4);
-      tl.fromTo("#mach", { scale: 1.12 }, { scale: 1, duration: 0.2, ease: S(2), ...IR }, 20.0);   // hit on Mach 1.4
-      tl.to("#machn", { color: "#c41e3a", duration: 0.01 }, 20.0);
-      tl.to("#L5", { x: 150, y: -190, scale: 0.08, opacity: 0, duration: 0.7, ease: S(7) }, 20.75);
-      tl.fromTo("#st5", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.18, ease: S(2), ...IR }, 21.35);
+      tl.to(ms, { v: 1.4, duration: 0.7, ease: S(8), onUpdate: () => { $("machn").textContent = "MACH " + ms.v.toFixed(1); } }, 15.25);
+      tl.fromTo("#machb", { scaleX: 0.43 }, { scaleX: 1, duration: 0.7, ease: S(8), ...IR }, 15.25);
+      tl.fromTo("#mach", { scale: 1.12 }, { scale: 1, duration: 0.2, ease: S(2), ...IR }, 15.95);
+      tl.to("#machn", { color: "#c41e3a", duration: 0.01 }, 15.95);
+      tl.to("#c5", { x: 6, y: -5, duration: 0.05, yoyo: true, repeat: 9, ease: S(1) }, 15.4);
+      tl.to("#L5", { x: 70, y: -70, duration: 0.5, ease: S(5) }, 16.3);   // stays ahead: never closer
+      tl.fromTo("#st5", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.18, ease: S(2), ...IR }, 16.75);
 
-      // ---------- S6: skeptic view ----------
-      pulse("#h6a", 22.8, 27, 0.7); pulse("#h6b", 22.9, 27, 0.7); pulse("#h6c", 23.0, 27, 0.7);
-      tl.fromTo("#skep", { opacity: 1, y: 520 }, { opacity: 1, y: 0, duration: 0.4, ease: S(5), ...IR }, 22.9);
-      tl.fromTo("#sk1", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.15, ease: S(2), ...IR }, 23.4);
-      tl.fromTo("#sk2", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.15, ease: S(2), ...IR }, 24.95);
+      // ---------- S3 radar: empty scope ----------
+      tl.fromTo("#k3", { opacity: 1, y: -140 }, { opacity: 1, y: 0, duration: 0.35, ease: S(4), ...IR }, 18.05);
+      tl.fromTo("#st3", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.18, ease: S(2), ...IR }, 18.3);
 
-      // ---------- S7: end card ----------
-      tl.fromTo("#kick7", { opacity: 1, y: -160 }, { opacity: 1, y: 0, duration: 0.3, ease: S(3), ...IR }, 26.85);
-      tl.fromTo("#card", { opacity: 1, scale: 1.25, rotation: -6 }, { opacity: 1, scale: 1, rotation: -1.2, duration: 0.3, ease: S(3), ...IR }, 26.95);
-      tl.fromTo(["#tp1", "#tp2"], { opacity: 0 }, { opacity: 1, duration: 0.1, stagger: 0.15, ease: S(1), ...IR }, 27.3);
-      tl.fromTo("#cta", { opacity: 1, y: 440 }, { opacity: 1, y: 0, duration: 0.35, ease: S(4), ...IR }, 27.5);
-      tl.fromTo("#l1", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: S(1), ...IR }, 28.0);
-      tl.fromTo("#l2", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: S(1), ...IR }, 28.2);
-      tl.fromTo("#st7", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.18, ease: S(2), ...IR }, 28.45);
+      // ---------- S6 skeptic view (slip drops from the top: never crosses the caption) ----------
+      pulse("#h6a", 22.8, 26.8, 0.7); pulse("#h6b", 22.9, 26.8, 0.7); pulse("#h6c", 23.0, 26.8, 0.7);
+      tl.fromTo("#skep", { opacity: 1, y: -760 }, { opacity: 1, y: 0, duration: 0.4, ease: S(5), ...IR }, 22.85);
+      tl.fromTo("#sk1", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.15, ease: S(2), ...IR }, 23.45);
+      tl.fromTo("#sk2", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.15, ease: S(2), ...IR }, 24.65);
+
+      // ---------- S7 end card (no empty frames) ----------
+      tl.fromTo("#kick7", { opacity: 1, y: -160 }, { opacity: 1, y: 0, duration: 0.3, ease: S(3), ...IR }, 26.4);
+      tl.fromTo("#card", { opacity: 1, scale: 1.25, rotation: -6 }, { opacity: 1, scale: 1, rotation: -1.2, duration: 0.3, ease: S(3), ...IR }, 26.45);
+      tl.fromTo(["#tp1", "#tp2"], { opacity: 0 }, { opacity: 1, duration: 0.1, stagger: 0.15, ease: S(1), ...IR }, 26.8);
+      tl.fromTo("#cta", { opacity: 1, y: 440 }, { opacity: 1, y: 0, duration: 0.35, ease: S(4), ...IR }, 27.0);
+      tl.fromTo("#l1", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: S(1), ...IR }, 27.5);
+      tl.fromTo("#l2", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: S(1), ...IR }, 27.7);
+      tl.fromTo("#st7", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.18, ease: S(2), ...IR }, 27.95);
 
       tl.to("#flick", { opacity: 0.07, duration: 0.08, yoyo: true, repeat: 185, ease: S(1) }, 0);
       tl.fromTo("#bgm", { volume: 0.34 }, { volume: 0.34, duration: 0.01 }, 0);
