@@ -5,6 +5,7 @@ Guía para producir vídeos promocionales de **uapcodex.org**, un sitio de inves
 **Idioma:** hablar con el usuario en español. Los vídeos van en inglés.
 
 ## 0. Reglas del usuario (obligatorias)
+- **QA siempre, antes de entregar cualquier cosa** (vídeo, guion, imágenes, tarjeta), y el resultado **escrito en `projects/<caso>/QA.md`**. Ver §8b. Pedido explícito del usuario: "siempre realizar QA sobre lo realizado".
 - Ser correcto antes que sonar seguro. Si algo no está verificado, decirlo ("no estoy seguro", "deberías verificarlo").
 - **Nunca inventar fuentes, citas, cifras ni eslóganes.** Todo dato del vídeo sale de la ficha del caso en `uapcodex.org/cases/<slug>/` o de una fuente primaria nombrada.
   - Ejemplo de error cometido: se escribió "EVIDENCE · NOT BELIEF" como lema del sitio y hubo que quitarlo.
@@ -131,6 +132,31 @@ Guía para producir vídeos promocionales de **uapcodex.org**, un sitio de inves
 3. Recomprimir: `ffmpeg -i master.mp4 -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -af "loudnorm=I=-14:TP=-1.5:LRA=11" -ar 48000 -c:a aac -b:a 192k -movflags +faststart <caso>-1x1-30s-ig.mp4`
 4. `python uapcodex/scripts/check_audio.py <ig.mp4>`: la transcripción debe coincidir con el guion, con unos -14 LUFS.
 5. Enviar con `SendUserFile` y resumir qué se verificó y qué queda pendiente.
+
+## 8b. QA obligatorio (siempre, y documentado en `QA.md`)
+Antes de enviar cualquier entregable, hacer un QA completo y dejarlo en `projects/<caso>/QA.md`. Si se corrige algo, añadir una nueva sección fechada; no borrar las anteriores.
+
+Plantilla de `QA.md`:
+```
+# QA · <caso> · <versión> · <fecha>
+Veredicto: ✅ listo / ⚠️ listo con avisos / ❌ no publicar
+## Rigor (contra la ficha, consultada <fecha>)
+| Frase o dato en pantalla | Cita literal de la ficha | Estado ✅/⚠️/❌ |
+## Imagen (hoja cada 0,5 s + fotograma 0 + último fotograma)
+- Portada (fotograma 0): ¿se ven el gancho y el elemento clave?
+- Solapes de textos o subtítulos, fotogramas vacíos, recortes cortados, restos de inpainting, textos pequeños
+## Audio
+- Transcripción de la mezcla completa frente al guion (palabra a palabra)
+- LUFS/pico del máster; voz frente a música (≈12 LU por debajo mientras se habla)
+- Sincronía de subtítulos (≤0,1 s) y de golpes clave
+## Técnico
+- Resolución, fps, códec, pix_fmt, duración, tamaño (<30 MB)
+## Pendiente de verificar / riesgos
+```
+Reglas del QA:
+- Cada dato del vídeo debe tener su cita literal. Si no la tiene, se marca ❌ y se corrige o se elimina.
+- **Volver a consultar la ficha el mismo día de la entrega.** Las fichas cambian: Manises pasó de las notas antiguas (78%, "radar contact") a la ficha actual (50%, sin contacto consistente), y el índice `/cases/` puede no coincidir con la ficha, que es la fuente válida.
+- Hacer también QA de las entregas anteriores cuando aparezca un dato nuevo que las afecte, y avisar al usuario.
 
 ## 9. Entorno (avisos)
 - **`projects/` está en `.gitignore`.** Los renders y recursos de cada vídeo **no se guardan en git**, y el contenedor en la nube es temporal: entregar siempre los archivos con `SendUserFile`. Las ilustraciones quedan además en el Canva del usuario.
